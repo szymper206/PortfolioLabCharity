@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,16 +25,11 @@ public class DonationService {
         donationRepository.delete(donation);
     }
 
-    public List<Donation> findAllDonations() {
-        return donationRepository.findAll();
+    public long findAllDonations() {
+        return donationRepository.count();
     }
 
     public Integer getAllBags() {
-        int allBags = 0;
-        List<Donation> donations = findAllDonations();
-        for (Donation donation: donations) {
-            allBags += donation.getQuantity();
-        }
-        return allBags;
+        return donationRepository.findAllBags();
     }
 }

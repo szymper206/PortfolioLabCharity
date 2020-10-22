@@ -29,8 +29,8 @@ public class HomeController {
     }
 
     @ModelAttribute("allDonations")
-    public int showNumberOfDonations() {
-        return donationService.findAllDonations().size();
+    public long showNumberOfDonations() {
+        return donationService.findAllDonations();
     }
 
 

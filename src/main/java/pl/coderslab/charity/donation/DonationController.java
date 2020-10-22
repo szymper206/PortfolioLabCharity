@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.category.Category;
 import pl.coderslab.charity.category.CategoryService;
+import pl.coderslab.charity.institution.Institution;
+import pl.coderslab.charity.institution.InstitutionService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,11 +22,17 @@ import java.util.List;
 public class DonationController {
     private final DonationService donationService;
     private final CategoryService categoryService;
+    private final InstitutionService institutionService;
 
 
     @ModelAttribute("categories")
     public List<Category> getAllCategories() {
         return categoryService.findAllCategory();
+    }
+
+    @ModelAttribute("institutions")
+    public List<Institution> getAllInstitutions() {
+        return institutionService.findAllInstitution();
     }
 
     @GetMapping("/add")
@@ -33,7 +41,7 @@ public class DonationController {
         return "form";
     }
 
-    @PostMapping("/donation")
+    @PostMapping("/add")
     public String addDonation(@Valid Donation donation, BindingResult result) {
         if (result.hasErrors()) {
             return "form";
