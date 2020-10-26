@@ -1,19 +1,15 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="pl">
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-    <link rel="stylesheet" href="<c:url value="../../resources/css/style.css"/>" />
-  </head>
+    <link rel="stylesheet" href="../css/style.css"/>  </head>
   <body>
     <header class="header--form-page">
-
-      <jsp:include page="../../META-INF/header-logged.jsp"/>
+      <div th:include="fragments/header-logged :: loggedheader">
+      </div>
 
       <div class="slogan container container--90">
         <div class="slogan--item">
@@ -66,13 +62,18 @@
       <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form:form method="post" modelAttribute="donation">
+        <form th:action="@{/donation/add}" th:object="${donation}" method="post">
           <!-- STEP 1: class .active is switching steps -->
           <div data-step="1" class="active">
             <h3>Zaznacz co chcesz oddać:</h3>
 
-            <form:checkboxes path="categories" items="${categories}" element="div"
-                             itemValue="id" itemLabel="name"/>
+            <div class="form-group form-group--checkbox" th:each="category : ${categories}">
+              <label>
+                <input type="checkbox" class="checkbox" name="categories" value="clothes-to-use" th:field="*{institution}" th:value="${category.id}"/>
+                <span class="checkbox"></span>
+                <span class="description" th:text="${category.getName()}"></span>
+              </label>
+            </div>
 
             <div class="form-group form-group--buttons">
               <button type="button" class="btn next-step">Dalej</button>
@@ -86,7 +87,7 @@
             <div class="form-group form-group--inline">
               <label>
                 Liczba 60l worków:
-                <form:input type="number" path="quantity" step="1" min="1" />
+                <input type="number" name="bags" step="1" min="1" th:field="*{quantity}"/>
               </label>
             </div>
 
@@ -102,12 +103,16 @@
           <div data-step="3">
             <h3>Wybierz organizacje, której chcesz pomóc:</h3>
 
-
-
-                <form:radiobuttons path="institution" items="${institutions}" element="div"
-                                   itemValue="id" itemLabel="name"/>
-
-
+            <div class="form-group form-group--checkbox" th:each="institution : ${institutions}">
+              <label>
+                <input type="radio" name="organization" value="old" th:field="*{institution}"/>
+                <span class="checkbox radio"></span>
+                <span class="description">
+                  <div class="title" th:text="${institution.getName()}"></div>
+                  <div class="subtitle" th:text="${institution.getDescription()}"></div>
+                </span>
+              </label>
+            </div>
 
             <div class="form-group form-group--buttons">
               <button type="button" class="btn prev-step">Wstecz</button>
@@ -123,22 +128,22 @@
               <div class="form-section--column">
                 <h4>Adres odbioru</h4>
                 <div class="form-group form-group--inline">
-                  <label> Ulica <form:input type="text" path="street" /> </label>
+                  <label> Ulica <input type="text" name="address" /> </label>
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label> Miasto <form:input type="text" path="city" /> </label>
+                  <label> Miasto <input type="text" name="city" /> </label>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
-                    Kod pocztowy <form:input type="text" path="zipCode" />
+                    Kod pocztowy <input type="text" name="postcode" />
                   </label>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
-                    Numer telefonu <form:input type="phone" path="phone" />
+                    Numer telefonu <input type="phone" name="phone" />
                   </label>
                 </div>
               </div>
@@ -146,17 +151,17 @@
               <div class="form-section--column">
                 <h4>Termin odbioru</h4>
                 <div class="form-group form-group--inline">
-                  <label> Data <form:input type="date" path="pickUpDate" /> </label>
+                  <label> Data <input type="date" name="data" /> </label>
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label> Godzina <form:input type="time" path="pickUpTime" /> </label>
+                  <label> Godzina <input type="time" name="time" /> </label>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
                     Uwagi dla kuriera
-                    <form:textarea path="pickUpComment" rows="5" />
+                    <textarea name="more_info" rows="5"></textarea>
                   </label>
                 </div>
               </div>
@@ -218,13 +223,12 @@
               <button type="submit" class="btn">Potwierdzam</button>
             </div>
           </div>
-        </form:form>
+        </form>
       </div>
     </section>
 
-    <jsp:include page="../../META-INF/footer.jsp"/>
+    <footer th:include="fragments/footer :: pagefooter"></footer>
 
-    <script src="<c:url value="../../resources/js/app.js"/>"></script>
-
+    <script src="../js/app.js"></script>
   </body>
 </html>
