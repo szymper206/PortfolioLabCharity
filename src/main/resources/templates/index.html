@@ -68,7 +68,7 @@
         </div>
     </div>
 
-    <a href="#" class="btn btn--large">Załóż konto</a>
+    <a href="/user/register" class="btn btn--large">Załóż konto</a>
 </section>
 
 <section class="about-us" id="about-us">
@@ -97,7 +97,7 @@
                     <div class="title" th:if="${iterStat.even}" th:text="${institution.getName()}"></div>
                     <div class="subtitle" th:if="${iterStat.even}" th:text="${institution.getDescription()}"></div>
                 </div>
-                <div class="col" >
+                <div class="col">
                     <div class="title" th:if="${iterStat.odd}" th:text="${institution.getName()}"></div>
                     <div class="subtitle" th:if="${iterStat.odd}" th:text="${institution.getDescription()}"></div>
                 </div>

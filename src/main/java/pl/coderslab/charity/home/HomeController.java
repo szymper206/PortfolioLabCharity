@@ -1,4 +1,4 @@
-package pl.coderslab.charity;
+package pl.coderslab.charity.home;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -37,6 +37,11 @@ public class HomeController {
     @RequestMapping("/")
     public String homeAction(Model model){
         return "index";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
     }
 
 
