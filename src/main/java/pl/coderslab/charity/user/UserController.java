@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
@@ -27,9 +28,12 @@ public class UserController {
 
     @PostMapping("/register")
     public String addUser(@ModelAttribute @Valid User user,
-                          BindingResult bindResult) {
+                          BindingResult bindResult, HttpServletRequest request) {
         if(bindResult.hasErrors())
             return "register";
+        if(!request.getParameter("password2").equals(user.getPassword())) {
+            return "error";
+        }
         else {
             userService.addUser(user);
             return "confirmRegistration";

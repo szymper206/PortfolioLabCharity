@@ -3,6 +3,7 @@ package pl.coderslab.charity.user;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import pl.coderslab.charity.validation.UniqueEmail;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -24,9 +25,10 @@ public class User {
     private String lastName;
     @Email(message = "Nieprawidłowy format adresu")
     @NotBlank(message = "Pole nie może być puste")
+    @UniqueEmail
     @Column(nullable = false, unique = true, length = 60)
     private String email;
-    @NotBlank
+    @NotBlank(message = "Pole nie może być puste")
     @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}",
             message = "Musi zawierać co najmniej jedną cyfrę, jedną dużą i małą literę oraz co najmniej 8 znaków")
     private String password;
