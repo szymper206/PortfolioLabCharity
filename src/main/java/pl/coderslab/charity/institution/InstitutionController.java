@@ -77,19 +77,19 @@ public class InstitutionController {
         return "redirect:/institution/all";
     }
 
-//    @PostMapping("/delete/{id}")
-//    public String deleteInstitution(@Valid Institution institution,
-//                                   BindingResult result,
-//                                   @PathVariable long id,
-//                                   Model model) {
-//        if (result.hasErrors()) {
-//            return "redirect:/institution/all";
-//        }
-//        if (institution.getId() != id) {
-//            model.addAttribute("errorMessage", "id sie nie zgadzają");
-//            return "error";
-//        }
-//        institutionService.deleteInstitution(institution);
-//        return "redirect:/institution/all";
-//    }
+    @PostMapping("/delete/{id}")
+    public String deleteInstitution(@Valid Institution institution,
+                                   BindingResult result,
+                                   @PathVariable long id,
+                                   Model model) {
+        if (result.hasErrors()) {
+            return "redirect:/institution/all";
+        }
+        if (institution.getId() != id) {
+            model.addAttribute("errorMessage", "id sie nie zgadzają");
+            return "error";
+        }
+        institutionService.deleteInstitution(institution);
+        return "redirect:/institution/all";
+    }
 }
