@@ -22,7 +22,7 @@ public class InstitutionService {
         return institutionRepository.findById(id);
     }
 
-    public void deleteCategory(Institution institution) {
+    public void deleteInstitution(Institution institution) {
         institutionRepository.delete(institution);
     }
 

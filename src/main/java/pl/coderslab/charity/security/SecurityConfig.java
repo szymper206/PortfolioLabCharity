@@ -20,12 +20,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
-                .antMatchers("/", "/user/register").permitAll()
-                .antMatchers("/donation/**").hasRole("USER")
-                .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").failureUrl("/login-error").permitAll()
-                .and().logout().logoutSuccessUrl("/").permitAll();
+//        httpSecurity.authorizeRequests()
+//                .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
+//                .antMatchers("/", "/user/register").permitAll()
+//                .antMatchers("/donation/**").hasRole("USER")
+//                .anyRequest().authenticated()
+//                .and().formLogin().loginPage("/login").failureUrl("/login-error").permitAll()
+//                .and().logout().logoutSuccessUrl("/").permitAll();
 
     }
 }

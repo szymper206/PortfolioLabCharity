@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>All Institution</title>
+</head>
+<body>
+<div>
+    <h1>Lista Instytucji</h1>
+</div>
+<div class="container">
+    <a href="/institution/add"><input type="submit" value="Dodaj instytucję"></a><br>
+    <table border="1">
+        <tr class="thead-dark">
+            <td>Id</td>
+            <td>Nazwa</td>
+            <td>Opis</td>
+            <td>Akcja</td>
+        </tr>
+            <tr th:each="institution : ${institutions}">
+                <td th:text="${institution.getId()}"></td>
+                <td th:text="${institution.getName()}"></td>
+                <td th:text="${institution.getDescription()}"></td>
+                <td>
+                    <a th:href="@{'/institution/edit/' + ${institution.getId()}}">Edycja</a>
+                    <a th:href="@{'/institution/delete/' + ${institution.getId()}}">Usuwanie</a>
+                </td>
+            </tr>
+    </table>
+    <br>
+    <a href="/"><input type="submit" value="Powrót do strony głównej"></a>
+</div>
+</body>
+</html>
