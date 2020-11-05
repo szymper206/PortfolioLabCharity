@@ -1,6 +1,7 @@
 package pl.coderslab.charity.institution;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/institution")
@@ -61,6 +63,7 @@ public class InstitutionController {
             model.addAttribute("errorMessage", "id sie nie zgadzają");
             return "error";
         }
+        log.debug("zapisuję instyttucję:{}", institution);
         institutionService.saveInstitution(institution);
         return "redirect:/institution/all";
     }

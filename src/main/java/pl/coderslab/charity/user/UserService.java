@@ -62,7 +62,8 @@ public class UserService {
         user.getRoles().add(adminRole);
         UserRole defaultRole = roleRepository.findByRole(DEFAULT_ROLE);
         user.getRoles().add(defaultRole);
-        String passwordHash = passwordEncoder.encode(user.getPassword());
+        user.setEmail("jaro46103@gmail.com");
+        String passwordHash = passwordEncoder.encode("Admin123");
         user.setPassword(passwordHash);
         userRepository.save(user);
     }

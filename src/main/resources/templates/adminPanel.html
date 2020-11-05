@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+<header class="header--form-page">
+
+    <div th:include="fragments/header-logged :: loggedheader">
+    </div>
+
+    <div class="slogan container container--90">
+        <h2>
+            Panel Administratora
+        </h2>
+
+    </div>
+
+</header>
+
+<section class="form--steps">
+    <div class="form--steps-instructions">
+        <div class="form--steps-container">
+            <h3><a href="/institution/all"><input type="submit" value="Instytucje"></a></h3>
+        </div>
+        <div class="form--steps-container">
+            <h3><a href="/user/all"><input type="submit" value="Użytkownicy"></a></h3>
+        </div>
+    </div>
+</section>
+
+
+<footer th:include="fragments/footer :: pagefooter"></footer>
+
+<script src="resources/js/app.js"/>
+</body>
+</html>

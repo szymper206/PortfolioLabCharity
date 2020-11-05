@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <body>
 <div th:fragment="loggedheader">
     <nav class="container container--70">
         <ul class="nav--actions">
             <li class="logged-user" >
-                Witaj Agata
+                <p sec:authentication="name"></p>
                 <ul class="dropdown">
                     <li><a href="#">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="#">Wyloguj</a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a href="/user/adminPanel">Panel administratora</a>
+                    </li>
+                    <li>
+                        <form action="logmeout" th:action="@{/logmeout}" method="post" >
+                            <input type="submit" value="Log me out" />
+                        </form>
+                    </li>
                 </ul>
             </li>
         </ul>
